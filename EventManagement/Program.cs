@@ -1,0 +1,169 @@
+﻿using EventManagement.Services;
+using EventManagement.Models;
+using System.Security.Cryptography.X509Certificates;
+
+namespace EventManagement  
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            EventService eventService = new EventService();
+            ParticipantService participantService = new ParticipantService();
+            RegistrationService registrationService =
+    new RegistrationService(eventService, participantService);
+            Console.WriteLine("Welcome to the Event Management System!\n");
+            bool running = true;
+            while(running)
+            {
+                
+                
+                Console.WriteLine("Choose an option:");
+                Console.WriteLine("1. Create Event");
+                Console.WriteLine("2. Display Events");
+                Console.WriteLine("3. Search Event");
+                Console.WriteLine("4. Get Event by ID");
+                Console.WriteLine("5. Update Event");
+                Console.WriteLine("6. Delete Event");
+                Console.WriteLine("7. Register Participant");
+                Console.WriteLine("8. Display Participants");
+                Console.WriteLine("9. Search Participant");
+                Console.WriteLine("10. Update Participant");
+                Console.WriteLine("11. Register Participant");
+                Console.WriteLine("12. Exit");
+                int choice = Convert.ToInt32(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        Console.WriteLine("Enter Event ID:");
+                        string eventId = Console.ReadLine();
+
+                        Console.WriteLine("Enter Event Name:");
+                        string eventName = Console.ReadLine();
+
+                        Console.WriteLine("Enter Venue:");
+                        string venue = Console.ReadLine();
+
+                        Console.WriteLine("Enter Event Date (yyyy-MM-dd):");
+                        DateTime eventDate = DateTime.Parse(Console.ReadLine());
+
+                        Console.WriteLine("Enter Capacity:");
+                        int capacity = Convert.ToInt32(Console.ReadLine());
+
+                        Console.WriteLine("Enter Registration Fee:");
+                        decimal registrationFee = Convert.ToDecimal(Console.ReadLine());
+
+                        var newEvent = new Event(eventId, eventName, venue, eventDate, capacity, registrationFee);
+                        eventService.CreateEvent(newEvent);
+
+                        break;
+                    case 2:
+                        eventService.DisplayEvents();
+                        break;
+                    case 3:
+                        Console.WriteLine("Enter keyword to search by name or venue:");
+                        string keyword = Console.ReadLine();
+                        eventService.SearchEventByNameorVenue(keyword);
+                        break;
+
+                    case 4:
+                        Console.WriteLine("Enter Event ID to search:");
+                        string searchId = Console.ReadLine();
+                        Event? foundevent = eventService.GetEventById(searchId);
+                        if (foundevent != null)
+                        {
+                            Console.WriteLine($"Event found: {foundevent.eventName} on {foundevent.eventDate} at {foundevent.venue}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Event not found.");
+                        }
+                        break;
+                    case 5:
+                        Console.WriteLine("Enter Event ID to update:");
+                        string updateId = Console.ReadLine();
+
+                        Console.WriteLine("Enter new Venue:");
+                        string newVenue = Console.ReadLine();
+
+                        Console.WriteLine("Enter new Event Date (yyyy-MM-dd):");
+                        DateTime newEventDate = DateTime.Parse(Console.ReadLine());
+
+                        Console.WriteLine("Enter new Capacity:");
+                        int newCapacity = Convert.ToInt32(Console.ReadLine());
+
+                        Console.WriteLine("Enter new Registration Fee:");
+                        decimal newRegistrationFee = Convert.ToDecimal(Console.ReadLine());
+
+                        eventService.UpdateEvent(newVenue, newEventDate, newCapacity, newRegistrationFee, updateId);
+                        break;
+
+                    case 6:
+                        Console.WriteLine("Enter Event ID to delete:");
+                        eventService.DeleteEvent(Console.ReadLine());
+                        break;
+                    case 7:
+                        Console.WriteLine("Enter Participant ID:");
+                        string participantId = Console.ReadLine();
+
+                        Console.WriteLine("Enter Full Name:");
+                        string fullName = Console.ReadLine();
+
+                        Console.WriteLine("Enter Email:");
+                        string email = Console.ReadLine();
+
+                        Console.WriteLine("Enter PhoneNumber:");
+                        string phoneNumber = Console.ReadLine();
+
+                        var newParticipant = new Participant(participantId, fullName, email, phoneNumber);
+                        participantService.RegisterParticipant(newParticipant);
+
+                        break;
+                    case 8:
+                        participantService.DisplayParticipants();
+                        break;
+                    case 9:
+                        Console.WriteLine("Enter name or email to search participant:");
+                        string participantKeyword = Console.ReadLine();
+                        participantService.SearchParticipantByNameorEmail(participantKeyword);
+                        break;
+                    case 10:
+                        Console.WriteLine("Enter Participant ID to update:");
+                        string updateParticipantId = Console.ReadLine();
+
+                        Console.WriteLine("Enter new Full Name:");
+                        string newFullName = Console.ReadLine();
+
+                        Console.WriteLine("Enter new Email:");
+                        string newEmail = Console.ReadLine();
+
+                        Console.WriteLine("Enter new PhoneNumber:");
+                        string newPhoneNumber = Console.ReadLine();
+
+                        participantService.UpdateParticipant(newFullName, newEmail, newPhoneNumber, updateParticipantId);
+                        break;
+                    case 11:
+                        Console.WriteLine("Enter Participant ID to register for an event:");
+                        string regParticipantId = Console.ReadLine();
+                        Console.WriteLine("Enter Event ID to register for:");
+                        string regEventId = Console.ReadLine();
+                        Console.WriteLine("Enter Registration ID:");
+                        string regId = Console.ReadLine();
+                        registrationService.RegisterParticipantForEvent(regId, regEventId, regParticipantId);
+                        break;
+
+                    case 12:
+
+                        running = false;
+                        Console.WriteLine("Exiting the system. Goodbye!");
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid choice. Please try again.");
+                        break;
+                }
+
+            }
+        }
+    }
+}

@@ -1,0 +1,15 @@
+C:\Users\mahih\source\repos\EventManagement\EventManagement\obj\Debug\net10.0\EventManagement.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mahih\source\repos\EventManagement\EventManagement\obj\Debug\net10.0\EventManagement.AssemblyInfoInputs.cache
+C:\Users\mahih\source\repos\EventManagement\EventManagement\obj\Debug\net10.0\EventManagement.AssemblyInfo.cs
+C:\Users\mahih\source\repos\EventManagement\EventManagement\obj\Debug\net10.0\EventManagement.csproj.CoreCompileInputs.cache
+C:\Users\mahih\source\repos\EventManagement\EventManagement\bin\Debug\net10.0\EventManagement.exe
+C:\Users\mahih\source\repos\EventManagement\EventManagement\bin\Debug\net10.0\EventManagement.deps.json
+C:\Users\mahih\source\repos\EventManagement\EventManagement\bin\Debug\net10.0\EventManagement.runtimeconfig.json
+C:\Users\mahih\source\repos\EventManagement\EventManagement\bin\Debug\net10.0\EventManagement.dll
+C:\Users\mahih\source\repos\EventManagement\EventManagement\bin\Debug\net10.0\EventManagement.pdb
+C:\Users\mahih\source\repos\EventManagement\EventManagement\obj\Debug\net10.0\EventManagement.dll
+C:\Users\mahih\source\repos\EventManagement\EventManagement\obj\Debug\net10.0\refint\EventManagement.dll
+C:\Users\mahih\source\repos\EventManagement\EventManagement\obj\Debug\net10.0\EventManagement.pdb
+C:\Users\mahih\source\repos\EventManagement\EventManagement\obj\Debug\net10.0\EventManagement.genruntimeconfig.cache
+C:\Users\mahih\source\repos\EventManagement\EventManagement\obj\Debug\net10.0\ref\EventManagement.dll
+C:\Users\mahih\source\repos\EventManagement\EventManagement\obj\Debug\net10.0\EventMan.E6E737A0.Up2Date
