@@ -102,6 +102,15 @@ namespace EventManagement.Services
             }
             
         }
+        public List<Participant> GetAllParticipants()
+        {
+            return participants;
+        }
+        public void LoadParticipants(List<Participant> loadedParticipants)
+        {
+            participants.Clear();
+            participants.AddRange(loadedParticipants);
+        }
 
     }
 }

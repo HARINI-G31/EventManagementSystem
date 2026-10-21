@@ -9,6 +9,7 @@ namespace EventManagement.Models
         public string ParticipantID { get; set; }
         public DateTime RegistrationDate { get; set; }
         public decimal AmountPaid { get; set; }
+        public RegistrationStatus Status { get; set; }
 
         public Registration(
             string registrationId,
@@ -22,6 +23,7 @@ namespace EventManagement.Models
             ParticipantID = participantId;
             RegistrationDate = registrationDate;
             AmountPaid = amountPaid;
+            Status = RegistrationStatus.Registered;
         }
     }
 }

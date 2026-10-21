@@ -1,0 +1,18 @@
+[
+  {
+    "eventName": "Sympo2k26",
+    "eventID": "E101",
+    "eventDate": "2027-01-01T00:00:00",
+    "venue": "Psna Clg",
+    "capacity": 50,
+    "registrationFee": 100
+  },
+  {
+    "eventName": "Culturals",
+    "eventID": "E102",
+    "eventDate": "2027-01-02T00:00:00",
+    "venue": "SSM Audi",
+    "capacity": 50,
+    "registrationFee": 100
+  }
+]

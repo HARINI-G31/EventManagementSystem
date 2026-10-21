@@ -1,0 +1,10 @@
+[
+  {
+    "RegistrationID": "R101",
+    "EventID": "E101",
+    "ParticipantID": "P102",
+    "RegistrationDate": "2026-10-21T21:21:38.6315389+05:30",
+    "AmountPaid": 100,
+    "Status": 2
+  }
+]

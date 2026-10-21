@@ -157,6 +157,15 @@ namespace EventManagement.Services
             events.Remove(existingEvent);
             Console.WriteLine("Event deleted successfully.");
         }
+        public List<Event> GetAllEvents()
+        {
+            return events;
+        }
+        public void LoadEvents(List<Event> loadedEvents)
+        {
+            events.Clear();
+            events.AddRange(loadedEvents);
+        }
     }
         
 }

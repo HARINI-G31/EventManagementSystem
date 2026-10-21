@@ -10,7 +10,6 @@
   <ItemGroup>
     <Folder Include="Exception\" />
     <Folder Include="Data\" />
-    <Folder Include="Utilities\" />
   </ItemGroup>
 
 </Project>

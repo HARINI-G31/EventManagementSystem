@@ -1,0 +1,14 @@
+[
+  {
+    "participantID": "P101",
+    "fullName": "Harini",
+    "email": "h@gmail.com",
+    "phoneNumber": "1234567890"
+  },
+  {
+    "participantID": "P102",
+    "fullName": "Janani",
+    "email": "j@gmail.com",
+    "phoneNumber": "0987654321"
+  }
+]

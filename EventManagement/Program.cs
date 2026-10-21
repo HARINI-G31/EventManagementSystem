@@ -1,6 +1,9 @@
 ﻿using EventManagement.Services;
 using EventManagement.Models;
 using System.Security.Cryptography.X509Certificates;
+using EventManagement.Utilities;
+using System.IO;
+
 
 namespace EventManagement  
 {
@@ -8,10 +11,35 @@ namespace EventManagement
     {
         public static void Main(string[] args)
         {
+
+            string dataFolder = Path.Combine(
+            AppContext.BaseDirectory, "Data");
+
+            string eventsFile = Path.Combine(dataFolder, "events.json");
+            string participantsFile = Path.Combine(dataFolder, "participants.json");
+            string registrationsFile = Path.Combine(dataFolder, "registrations.json");
+
+            JsonFileUtility jsonUtility = new JsonFileUtility();
+
             EventService eventService = new EventService();
+
             ParticipantService participantService = new ParticipantService();
-            RegistrationService registrationService =
-    new RegistrationService(eventService, participantService);
+
+            RegistrationService registrationService =new RegistrationService(eventService, participantService);
+
+            ReportUtility reportUtility = new ReportUtility(
+                            eventService,
+                            participantService,
+                            registrationService);
+
+            eventService.LoadEvents(jsonUtility.LoadData<Event>(eventsFile));
+
+            participantService.LoadParticipants(jsonUtility.LoadData<Participant>(participantsFile));
+
+            registrationService.LoadRegistrations(jsonUtility.LoadData<Registration>(registrationsFile));
+
+            Console.WriteLine("Saved data loaded successfully.");
+
             Console.WriteLine("Welcome to the Event Management System!\n");
             bool running = true;
             while(running)
@@ -30,7 +58,16 @@ namespace EventManagement
                 Console.WriteLine("9. Search Participant");
                 Console.WriteLine("10. Update Participant");
                 Console.WriteLine("11. Register Participant");
-                Console.WriteLine("12. Exit");
+                Console.WriteLine("12. Cancel Registration");
+                Console.WriteLine("13. Mark Attendance");
+                Console.WriteLine("14. Display All Registrations");
+                Console.WriteLine("15. Display Registration by ID");
+                Console.WriteLine("16. Display Events by Participant");
+                Console.WriteLine("17. Display Remaining Capacity");
+                Console.WriteLine("18. Display Full Events");
+                Console.WriteLine("19. Display Free Events");
+                Console.WriteLine("20. Exit");
+
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
                 {
@@ -153,8 +190,51 @@ namespace EventManagement
                         break;
 
                     case 12:
+                        Console.WriteLine("Enter Registration ID to cancel:");
+                        string cancelRegId = Console.ReadLine();
+                        registrationService.CancelRegistration(cancelRegId);
+                        break;
+                    case 13:
+                        Console.WriteLine("Enter Registration ID to mark attendance:");
+                        string markAttId = Console.ReadLine();
+                        registrationService.MarkAttendance(markAttId);
+                        break;
+                    case 14:
+                        registrationService.DisplayAllRegistrations();
+                        break;
+                    case 15:
+                        Console.WriteLine("Enter Registration ID to display:");
+                        string displayRegId = Console.ReadLine();
+                        registrationService.DisplayRegistrationById(displayRegId);
+                        break;
+                    case 16:
+                        Console.WriteLine("Enter Participant ID to display events:");
+                        string reportParticipantId = Console.ReadLine();
+                        reportUtility.DisplayEventsByParticipant(reportParticipantId);
+                        break;
+                    case 17:
+                        reportUtility.DisplayRemainingCapacity();
+                        break;  
+                    case 18:
+                        reportUtility.DisplayFullEvents();
+                        break;  
+                    case 19:
+                        reportUtility.DisplayFreeEvents();
+                        break;
+                    case 20:
+                        jsonUtility.SaveData(eventsFile, eventService.GetAllEvents());
+
+                        jsonUtility.SaveData(
+                            participantsFile,
+                            participantService.GetAllParticipants());
+
+                        jsonUtility.SaveData(
+                            registrationsFile,
+                            registrationService.GetAllRegistrations());
 
                         running = false;
+
+                        Console.WriteLine("All data saved successfully.");
                         Console.WriteLine("Exiting the system. Goodbye!");
                         break;
 
